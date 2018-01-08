@@ -11,7 +11,7 @@ namespace WpfAppSampleApp
     /// <summary>
     /// Interaction logic for App.xaml test p
     /// dev branch
-    /// sync
+    /// sync dev branch only
     /// </summary>
     public partial class App : Application
     {
