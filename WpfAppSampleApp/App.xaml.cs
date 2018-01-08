@@ -16,5 +16,6 @@ namespace WpfAppSampleApp
     /// </summary>
     public partial class App : Application
     {
+        //test from local
     }
 }
