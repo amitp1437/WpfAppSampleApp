@@ -1,33 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using EmployeeApi.Models;
+using System;
 using System.Security.Claims;
 using System.Web.Http;
+using System.Linq;
 
 namespace EmployeeApi.Controllers
 {
+    [RoutePrefix("api/employee")]
     public class EmployeeController : ApiController
     {
-        [Route("api/employee/Getall")]
+        EmployeeRepository repo = new EmployeeRepository();
+
+        [Route("Getall")]
         public IHttpActionResult GetAllEmployeeDetails()
         {
-            return Ok("Employee Data is unavailable currently");
+            try
+            {              
+                var result = repo.GetAllEmployee();
+                return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         [Authorize]
-        [Route("api/employee/Authenticate")]
+        [Route("Authenticate")]
         public IHttpActionResult GetAuthenticate()
         {
             var identity = (ClaimsIdentity)User.Identity;
-            return Ok(identity);
+            return Ok("Hello " + identity);
         }
 
         [Authorize(Roles = "user")]
-        public IHttpActionResult GetEmployeeById()
+        [Route("GetEmployeeById")]
+        public IHttpActionResult GetEmployeeById(int id)
         {
-            return Ok("Employee data is currently not available");
+            try
+            {
+                var data = repo.GetEmployeeById(id);
+
+                return Ok(data);
+            }
+            catch
+            {
+                return InternalServerError();
+            }
         }
 
     }
