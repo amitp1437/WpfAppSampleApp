@@ -22,7 +22,7 @@ namespace EmployeeApi
             OAuthAuthorizationServerOptions oAuthOptions = new OAuthAuthorizationServerOptions
             {
                 AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString(""),
+                TokenEndpointPath = new PathString("/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
                 Provider = myProvider
 

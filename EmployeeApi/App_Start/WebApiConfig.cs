@@ -17,7 +17,7 @@ namespace EmployeeApi
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                defaults: new {Controllers = "Employee", id = RouteParameter.Optional }
             );
         }
     }
