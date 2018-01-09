@@ -9,13 +9,13 @@ namespace EmployeeApi.Models
 {
     public class UserDetail
     {
+        [Key]
         public int UserId { get; set; }
 
         public string Username { get; set; }
 
         public string Password { get; set; }
-
-        [Key]
+      
         [ForeignKey("UserRole")]
         public int RoleId { get; set; }
 

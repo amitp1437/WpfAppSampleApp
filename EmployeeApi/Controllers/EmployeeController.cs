@@ -15,11 +15,11 @@ namespace EmployeeApi.Controllers
         public IHttpActionResult GetAllEmployeeDetails()
         {
             try
-            {              
+            {
                 var result = repo.GetAllEmployee();
                 return Ok(result);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
@@ -33,14 +33,27 @@ namespace EmployeeApi.Controllers
             return Ok("Hello " + identity);
         }
 
-        [Authorize(Roles = "user")]
+        [Authorize(Roles = "admin")]
         [Route("GetEmployeeById")]
         public IHttpActionResult GetEmployeeById(int id)
         {
             try
             {
                 var data = repo.GetEmployeeById(id);
+                return Ok(data);
+            }
+            catch
+            {
+                return InternalServerError();
+            }
+        }
 
+        [Route("CheckUserCredetial")]
+        public IHttpActionResult CheckUserCredetial(string userName, string password)
+        {
+            try
+            {
+                var data = repo.CheckUserCredetial(userName, password);
                 return Ok(data);
             }
             catch

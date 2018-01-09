@@ -14,6 +14,8 @@ namespace EmployeeApi.Models
 
         public string LastName { get; set; }
 
-        public int salary { get; set; }
+        public string Gender { get; set; }
+
+        public int Salary { get; set; }
     }
 }

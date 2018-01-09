@@ -21,5 +21,12 @@ namespace EmployeeApi.Models
 
             return data.SingleOrDefault();
         }
+
+        public UserDetail CheckUserCredetial(string userName, string password)
+        {
+            var data = context.UserDetails.Where(e => e.Username == userName && e.Password == password);
+
+            return data.FirstOrDefault();
+        }
     }
 }
