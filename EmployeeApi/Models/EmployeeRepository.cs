@@ -21,5 +21,11 @@ namespace EmployeeApi.Models
 
             return data.SingleOrDefault();
         }
+
+        internal void AddEmployee(Employees emp)
+        {
+            context.Employees.Add(emp);
+            context.SaveChanges();
+        }
     }
 }

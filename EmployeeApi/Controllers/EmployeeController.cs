@@ -3,9 +3,11 @@ using System;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Linq;
+using System.Web.Http.Cors;
 
 namespace EmployeeApi.Controllers
 {
+    [EnableCors(origins: "http://localhost:51100", headers: "*", methods: "*")]
     [RoutePrefix("api/employee")]
     public class EmployeeController : ApiController
     {
@@ -42,6 +44,26 @@ namespace EmployeeApi.Controllers
                 var data = repo.GetEmployeeById(id);
 
                 return Ok(data);
+            }
+            catch
+            {
+                return InternalServerError();
+            }
+        }
+
+        [Authorize(Roles = "admin")]
+        [Route("AddEmployee")]
+        [HttpPost]
+        public IHttpActionResult AddEmployee([FromBody] Employees emp)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                repo.AddEmployee(emp);
+                return Created("Created at {uri}", new Employees { Id = emp.Id });
             }
             catch
             {
