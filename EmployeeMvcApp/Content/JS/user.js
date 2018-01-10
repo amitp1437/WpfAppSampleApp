@@ -1,7 +1,7 @@
 ﻿function userService() {
     $(document).ready(function () {
         var accessToken;
-        GetUserAuthenticationToken();
+        //GetUserAuthenticationToken();
         //Get All the Employee
         function GetAuthenticated() {
             $.ajax({
@@ -32,11 +32,11 @@
         }
 
         //Get User Token using OWIN
-        function GetUserAuthenticationToken() {
+        function GetUserAuthenticationToken(userName, password) {
             $.ajax({
                 type: "POST",
                 url: "http://localhost:51100/token",
-                data: "grant_type=password&username=user&password=user",
+                data: "grant_type=password&username=" + userName + "&password=" + password + "",
                 contentType: "application/text; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -59,6 +59,7 @@
                 dataType: "json",
                 success: function (data) {
                     alert("user Login --> " + data.UserName);
+                    GetUserAuthenticationToken(data.UserName, data.Password);
                 }
             });
         });
