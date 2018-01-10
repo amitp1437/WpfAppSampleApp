@@ -22,6 +22,12 @@ namespace EmployeeApi.Models
             return data.SingleOrDefault();
         }
 
+        internal void AddEmployee(Employees emp)
+        {
+            context.Employees.Add(emp);
+            context.SaveChanges();
+        }
+
         public UserDetail CheckUserCredetial(string userName, string password)
         {
             var data = context.UserDetails.Where(e => e.Username == userName && e.Password == password);
