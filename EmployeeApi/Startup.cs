@@ -14,7 +14,7 @@ namespace EmployeeApi
     {
         public void Configuration(IAppBuilder app)
         {
-           // app.UseCors(CorsOptions.AllowAll);
+            app.UseCors(CorsOptions.AllowAll);
 
             var myProvider = new MyAuthorizationProvider();
 
