@@ -1,6 +1,5 @@
 ﻿function userService() {
     $(document).ready(function () {
-        var accessToken;
         //GetUserAuthenticationToken();
         //Get All the Employee
         function GetAuthenticated() {
@@ -9,7 +8,7 @@
                 url: "http://localhost:51100/api/employee/Authenticate",
                 data: "{}",
                 contentType: "application/json; charset=utf-8",
-                headers: { "Authorization": accessToken.token_type + " " + accessToken.access_token },
+                headers: { "Authorization": "bearer " + sessionStorage.getItem("access_token") },
                 dataType: "json",
                 success: function (data) {
                     alert("Authenticate --> " + data);
@@ -23,7 +22,7 @@
                 url: "http://localhost:51100/api/employee/GetEmployeeById?id=1",
                 data: "{}",
                 contentType: "application/json; charset=utf-8",
-                headers: { "Authorization": accessToken.token_type + " " + accessToken.access_token },
+                headers: { "Authorization": "bearer " + sessionStorage.getItem("access_token") },
                 dataType: "json",
                 success: function (data) {
                     alert("Authorized --> " + data.FirstName);
@@ -32,20 +31,23 @@
         }
 
         //Get User Token using OWIN
-        function GetUserAuthenticationToken(userName, password) {
+        function GetUserAuthenticationToken(userName, password, role, name) {
             $.ajax({
                 type: "POST",
                 url: "http://localhost:51100/token",
-                data: "grant_type=password&username=" + userName + "&password=" + password + "",
+                data: "grant_type=password&username=" + userName + "&password=" + password + "&role=" + role + "&name=" + name + "",
                 contentType: "application/text; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                    accessToken = {
-                        access_token: data.access_token,
-                        token_type: data.token_type
+                    if (sessionStorage) {
+                        sessionStorage.setItem('access_token', data.access_token);
                     }
-                    GetAuthenticated();
-                    GetAuthorized();
+                    //GetAuthenticated();
+                    //GetAuthorized();
+                    window.location.href = window.applicationBaseUrl + 'Employee/Index';
+                },
+                error: function (err, obj) {
+                    var t = null;
                 }
             });
         }
@@ -58,8 +60,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                    alert("user Login --> " + data.UserName);
-                    GetUserAuthenticationToken(data.UserName, data.Password);
+                    GetUserAuthenticationToken(data.username, data.password, data.roleId, data.username);
                 }
             });
         });
