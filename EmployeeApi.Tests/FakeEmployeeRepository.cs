@@ -21,7 +21,17 @@ namespace EmployeeApi.Tests
 
         public List<Employees> GetAllEmployee()
         {
-            throw new NotImplementedException();
+            var data = new List<Employees>()
+            {
+               new Employees
+               {
+                   FirstName = "Deo",
+                   LastName = "P",
+                   Gender = "M",
+                   Salary = 1500
+               }  
+            };
+            return data;
         }
 
         public Employees GetEmployeeById(int id)

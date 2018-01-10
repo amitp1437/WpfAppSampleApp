@@ -2,6 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EmployeeApi.Controllers;
 using System.Web.Http;
+using System.Web.Http.Results;
+using EmployeeApi.Models;
+using System.Collections.Generic;
 
 namespace EmployeeApi.Tests
 {
@@ -13,8 +16,8 @@ namespace EmployeeApi.Tests
         {
             var repo = new FakeEmployeeRepository();
             var controller = new EmployeeController(repo);
-            var result = controller.GetAllEmployeeDetails();
-            Assert.IsNotNull(result);
+            var result = controller.GetAllEmployeeDetails() as OkNegotiatedContentResult<List<Employees>>;
+            Assert.IsNotNull(result.Content);
         }
     }
 }

@@ -11,8 +11,6 @@ namespace EmployeeApi.Controllers
     [RoutePrefix("api/employee")]
     public class EmployeeController : ApiController
     {
-        //EmployeeRepository repo = new EmployeeRepository();
-
         private readonly IRepository repo;
 
         public EmployeeController(IRepository repo) 
