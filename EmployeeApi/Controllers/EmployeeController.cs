@@ -7,13 +7,14 @@ using System.Web.Http.Cors;
 
 namespace EmployeeApi.Controllers
 {
-    [EnableCors(origins: "http://localhost:51100", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/employee")]
     public class EmployeeController : ApiController
     {
         EmployeeRepository repo = new EmployeeRepository();
 
         [Route("Getall")]
+        [Authorize]
         public IHttpActionResult GetAllEmployeeDetails()
         {
             try
@@ -50,6 +51,7 @@ namespace EmployeeApi.Controllers
             }
         }
 
+        [HttpGet]
         [Route("CheckUserCredetial")]
         public IHttpActionResult CheckUserCredetial(string userName, string password)
         {
@@ -69,7 +71,7 @@ namespace EmployeeApi.Controllers
         [HttpPost]
         public IHttpActionResult AddEmployee([FromBody] Employees emp)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
