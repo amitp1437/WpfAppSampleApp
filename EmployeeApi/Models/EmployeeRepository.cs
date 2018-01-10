@@ -5,7 +5,7 @@ using System.Web;
 
 namespace EmployeeApi.Models
 {
-    public class EmployeeRepository
+    public class EmployeeRepository : IRepository, IDisposable
     {
         EmpContext context = new EmpContext();
         public List<Employees> GetAllEmployee()
@@ -22,7 +22,7 @@ namespace EmployeeApi.Models
             return data.SingleOrDefault();
         }
 
-        internal void AddEmployee(Employees emp)
+        public void AddEmployee(Employees emp)
         {
             context.Employees.Add(emp);
             context.SaveChanges();
@@ -33,6 +33,24 @@ namespace EmployeeApi.Models
             var data = context.UserDetails.Where(e => e.Username == userName && e.Password == password);
 
             return data.FirstOrDefault();
+        }
+
+        protected void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (context != null)
+                {
+                    context.Dispose();
+                    context = null;
+                }
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

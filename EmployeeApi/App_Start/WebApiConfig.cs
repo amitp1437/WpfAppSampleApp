@@ -18,7 +18,7 @@ namespace EmployeeApi
                 defaults: new {Controllers = "Employee", id = RouteParameter.Optional }
             );
 
-            config.EnableCors();
+            //config.EnableCors();
             var json = config.Formatters.JsonFormatter;
             json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
             json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

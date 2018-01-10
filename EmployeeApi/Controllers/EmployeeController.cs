@@ -7,11 +7,18 @@ using System.Web.Http.Cors;
 
 namespace EmployeeApi.Controllers
 {
-    [EnableCors(origins: "http://localhost:51100", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/employee")]
     public class EmployeeController : ApiController
     {
-        EmployeeRepository repo = new EmployeeRepository();
+        //EmployeeRepository repo = new EmployeeRepository();
+
+        private readonly IRepository repo;
+
+        public EmployeeController(IRepository repo) 
+        {
+            this.repo = repo;
+        }
 
         [Route("Getall")]
         public IHttpActionResult GetAllEmployeeDetails()

@@ -1,3 +1,5 @@
+using EmployeeApi.Models;
+using Microsoft.Practices.Unity.Configuration;
 using System;
 
 using Unity;
@@ -18,6 +20,12 @@ namespace EmployeeApi
               return container;
           });
 
+        public static IUnityContainer GetUnity()
+        {
+            var container = new UnityContainer();
+            //RegisterTypes(container);
+            return container;
+        }
         /// <summary>
         /// Configured Unity Container.
         /// </summary>
@@ -38,10 +46,11 @@ namespace EmployeeApi
         {
             // NOTE: To load from web.config uncomment the line below.
             // Make sure to add a Unity.Configuration to the using statements.
-            // container.LoadConfiguration();
+             container.LoadConfiguration();
 
-            // TODO: Register your type's mappings here.
-            // container.RegisterType<IProductRepository, ProductRepository>();
+
+            container.RegisterType<IRepository, EmployeeRepository>();
+            //Container.Resolve<IRepository>();
         }
     }
 }
