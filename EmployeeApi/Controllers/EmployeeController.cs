@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Web.Http;
 using System.Linq;
 using System.Web.Http.Cors;
+using EmployeeApi.EmployeeServiceReference;
 
 namespace EmployeeApi.Controllers
 {
@@ -11,15 +12,15 @@ namespace EmployeeApi.Controllers
     [RoutePrefix("api/employee")]
     public class EmployeeController : ApiController
     {
-        private readonly IRepository repo;
+        //private readonly IRepository repo;
 
-        public EmployeeController(IRepository repo) 
+        public EmployeeController()//EmployeeController(IRepository repo) 
         {
-            this.repo = repo;
+            //this.repo = repo;
         }
 
         [Route("Getall")]
-        [Authorize]
+        //[Authorize]
         public IHttpActionResult GetAllEmployeeDetails()
         {
             try
@@ -94,8 +95,9 @@ namespace EmployeeApi.Controllers
             }
             try
             {
-                repo.AddEmployee(emp);
-                return Created("Created at {uri}", new Employees { Id = emp.Id });
+                //repo.AddEmployee(emp);
+                //return Created("Created at {uri}", new Employees { Id = emp.Id });
+                return Ok();
             }
             catch(Exception ex)
             {
