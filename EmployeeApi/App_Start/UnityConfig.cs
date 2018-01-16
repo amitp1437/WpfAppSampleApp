@@ -49,7 +49,7 @@ namespace EmployeeApi
              container.LoadConfiguration();
 
 
-            container.RegisterType<IRepository, EmployeeRepository>();
+            //container.RegisterType<IRepository, EmployeeRepository>();
             //Container.Resolve<IRepository>();
         }
     }

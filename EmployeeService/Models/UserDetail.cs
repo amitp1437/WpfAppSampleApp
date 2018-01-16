@@ -5,16 +5,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace EmployeeApi.Models
+namespace EmployeeService
 {
     public class UserDetail
     {
+        [Key]
         public int UserId { get; set; }
 
         public string Username { get; set; }
 
         public string Password { get; set; }
       
+        [ForeignKey("UserRole")]
         public int RoleId { get; set; }
 
         public UserRole UserRole { get; set; }

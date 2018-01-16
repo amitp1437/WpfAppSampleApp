@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace EmployeeApi.Models
+namespace EmployeeService
 {
     public class Employees
     {
+        [key]
         public int Id { get; set; }
 
         public string FirstName { get; set; }
