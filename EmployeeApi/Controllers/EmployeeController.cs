@@ -25,6 +25,10 @@ namespace EmployeeApi.Controllers
             try
             {
                 var result = repo.GetAllEmployee();
+                if(result.Count == 0)
+                {
+                    return NotFound();
+                }
                 return Ok(result);
             }
             catch (Exception ex)
@@ -48,6 +52,10 @@ namespace EmployeeApi.Controllers
             try
             {
                 var data = repo.GetEmployeeById(id);
+                if(data == null)
+                {
+                    return NotFound();
+                }
                 return Ok(data);
             }
             catch
@@ -58,11 +66,15 @@ namespace EmployeeApi.Controllers
 
         [HttpGet]
         [Route("CheckUserCredetial")]
-        public IHttpActionResult CheckUserCredetial(string userName, string password)
+        public IHttpActionResult CheckUserCredential(string userName, string password)
         {
             try
             {
                 var data = repo.CheckUserCredetial(userName, password);
+                if(data == null)
+                {
+                    return NotFound();
+                }
                 return Ok(data);
             }
             catch
@@ -85,9 +97,9 @@ namespace EmployeeApi.Controllers
                 repo.AddEmployee(emp);
                 return Created("Created at {uri}", new Employees { Id = emp.Id });
             }
-            catch
+            catch(Exception ex)
             {
-                return InternalServerError();
+                return InternalServerError(ex);
             }
         }
 

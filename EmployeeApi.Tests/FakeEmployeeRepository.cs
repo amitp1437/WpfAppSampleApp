@@ -21,22 +21,26 @@ namespace EmployeeApi.Tests
 
         public List<Employees> GetAllEmployee()
         {
+            
             var data = new List<Employees>()
             {
                new Employees
                {
+                   Id = 1,
                    FirstName = "Deo",
                    LastName = "P",
                    Gender = "M",
                    Salary = 1500
-               }  
+               }
             };
             return data;
         }
 
         public Employees GetEmployeeById(int id)
         {
-            throw new NotImplementedException();
+            var data = GetAllEmployee().Where(e => e.Id == id).FirstOrDefault();
+
+            return data;
         }
     }
 }
