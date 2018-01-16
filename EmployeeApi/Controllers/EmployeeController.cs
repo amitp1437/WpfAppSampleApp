@@ -4,7 +4,8 @@ using System.Security.Claims;
 using System.Web.Http;
 using System.Linq;
 using System.Web.Http.Cors;
-using EmployeeApi.EmployeeServiceReference;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace EmployeeApi.Controllers
 {
@@ -21,15 +22,19 @@ namespace EmployeeApi.Controllers
 
         [Route("Getall")]
         //[Authorize]
-        public IHttpActionResult GetAllEmployeeDetails()
+        public async Task<IHttpActionResult> GetAllEmployeeDetails()
         {
             try
             {
-                var employeeService = new EmployeeServiceClient();
-                var result = employeeService.GetAllEmployee();
+                //var employeeService = new EmployeeServiceClient();
+                //var result = employeeService.GetAllEmployee();
                 //var result = repo.GetAllEmployee();
                 //return Ok(result);
-                return Ok(result);
+                Uri geturi = new Uri("http://localhost:51931/EmployeeService.svc/GetAllEmployee");
+                System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+                System.Net.Http.HttpResponseMessage responseGet = await client.GetAsync(geturi);
+                string response = await responseGet.Content.ReadAsStringAsync();
+                return Ok(response);
             }
             catch (Exception ex)
             {
