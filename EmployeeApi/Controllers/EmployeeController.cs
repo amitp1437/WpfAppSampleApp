@@ -4,7 +4,6 @@ using System.Security.Claims;
 using System.Web.Http;
 using System.Linq;
 using System.Web.Http.Cors;
-using EmployeeApi.EmployeeServiceReference;
 
 namespace EmployeeApi.Controllers
 {
@@ -12,23 +11,20 @@ namespace EmployeeApi.Controllers
     [RoutePrefix("api/employee")]
     public class EmployeeController : ApiController
     {
-        //private readonly IRepository repo;
+        private readonly IRepository repo;
 
-        public EmployeeController()//EmployeeController(IRepository repo) 
+        public EmployeeController(IRepository repo) 
         {
-            //this.repo = repo;
+            this.repo = repo;
         }
 
         [Route("Getall")]
-        //[Authorize]
+        [Authorize]
         public IHttpActionResult GetAllEmployeeDetails()
         {
             try
             {
-                var employeeService = new EmployeeServiceClient();
-                var result = employeeService.GetAllEmployee();
-                //var result = repo.GetAllEmployee();
-                //return Ok(result);
+                var result = repo.GetAllEmployee();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -51,9 +47,8 @@ namespace EmployeeApi.Controllers
         {
             try
             {
-                //var data = repo.GetEmployeeById(id);
-                //return Ok(data);
-                return Ok();
+                var data = repo.GetEmployeeById(id);
+                return Ok(data);
             }
             catch
             {
@@ -67,9 +62,8 @@ namespace EmployeeApi.Controllers
         {
             try
             {
-                //var data = repo.CheckUserCredetial(userName, password);
-                //return Ok(data);
-                return Ok();
+                var data = repo.CheckUserCredetial(userName, password);
+                return Ok(data);
             }
             catch
             {
@@ -88,9 +82,8 @@ namespace EmployeeApi.Controllers
             }
             try
             {
-                //repo.AddEmployee(emp);
-                //return Created("Created at {uri}", new Employees { Id = emp.Id });
-                return Ok();
+                repo.AddEmployee(emp);
+                return Created("Created at {uri}", new Employees { Id = emp.Id });
             }
             catch
             {

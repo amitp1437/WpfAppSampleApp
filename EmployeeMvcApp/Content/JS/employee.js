@@ -1,14 +1,14 @@
 ﻿function employeeService() {
     $(document).ready(function () {
 
-        //if (sessionStorage.getItem("access_token") == undefined || sessionStorage.getItem("access_token") == '') {
-        //    setLogout();
-        //}
-        //else {
-        //    GetAllEmployees();
-        //}
+        if (sessionStorage.getItem("access_token") == undefined || sessionStorage.getItem("access_token") == '') {
+            setLogout();
+        }
+        else {
+            GetAllEmployees();
+        }
 
-        GetAllEmployees();
+
         //Get All the Employee
         function GetAllEmployees() {
             $.ajax({

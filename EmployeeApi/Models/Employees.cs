@@ -7,6 +7,7 @@ namespace EmployeeApi.Models
 {
     public class Employees
     {
+        [key]
         public int Id { get; set; }
 
         public string FirstName { get; set; }

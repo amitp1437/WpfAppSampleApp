@@ -23,7 +23,7 @@ namespace EmployeeApi
             // var resolver = new UnityHierarchicalDependencyResolver(new UnityContainer());
 
             IUnityContainer container = new UnityContainer();
-            //container.RegisterType<IRepository, EmployeeRepository>();
+            container.RegisterType<IRepository, EmployeeRepository>();
              var resolver = new UnityDependencyResolver(container);
             
 
