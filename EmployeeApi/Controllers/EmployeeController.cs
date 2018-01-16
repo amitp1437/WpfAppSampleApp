@@ -26,24 +26,16 @@ namespace EmployeeApi.Controllers
         {
             try
             {
-<<<<<<< HEAD
-                //var employeeService = new EmployeeServiceClient();
-                //var result = employeeService.GetAllEmployee();
-                //var result = repo.GetAllEmployee();
-                //return Ok(result);
                 Uri geturi = new Uri("http://localhost:51931/EmployeeService.svc/GetAllEmployee");
                 System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
                 System.Net.Http.HttpResponseMessage responseGet = await client.GetAsync(geturi);
                 string response = await responseGet.Content.ReadAsStringAsync();
-                return Ok(response);
-=======
-                var result = repo.GetAllEmployee();
-                if(result.Count == 0)
+                if(response.Count() == 0)
                 {
                     return NotFound();
                 }
-                return Ok(result);
->>>>>>> master
+                return Ok(response);
+
             }
             catch (Exception ex)
             {
@@ -65,18 +57,15 @@ namespace EmployeeApi.Controllers
         {
             try
             {
-<<<<<<< HEAD
                 //var data = repo.GetEmployeeById(id);
                 //return Ok(data);
                 return Ok();
-=======
-                var data = repo.GetEmployeeById(id);
-                if(data == null)
-                {
-                    return NotFound();
-                }
-                return Ok(data);
->>>>>>> master
+                //var data = repo.GetEmployeeById(id);
+                //if(data == null)
+                //{
+                //    return NotFound();
+                //}
+                //return Ok(data);
             }
             catch
             {
@@ -90,18 +79,15 @@ namespace EmployeeApi.Controllers
         {
             try
             {
-<<<<<<< HEAD
                 //var data = repo.CheckUserCredetial(userName, password);
                 //return Ok(data);
                 return Ok();
-=======
-                var data = repo.CheckUserCredetial(userName, password);
-                if(data == null)
-                {
-                    return NotFound();
-                }
-                return Ok(data);
->>>>>>> master
+                //var data = repo.CheckUserCredetial(userName, password);
+                //if(data == null)
+                //{
+                //    return NotFound();
+                //}
+                //return Ok(data);
             }
             catch
             {
