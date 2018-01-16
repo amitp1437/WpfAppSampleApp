@@ -26,6 +26,7 @@ namespace EmployeeApi.Controllers
         {
             try
             {
+<<<<<<< HEAD
                 //var employeeService = new EmployeeServiceClient();
                 //var result = employeeService.GetAllEmployee();
                 //var result = repo.GetAllEmployee();
@@ -35,6 +36,14 @@ namespace EmployeeApi.Controllers
                 System.Net.Http.HttpResponseMessage responseGet = await client.GetAsync(geturi);
                 string response = await responseGet.Content.ReadAsStringAsync();
                 return Ok(response);
+=======
+                var result = repo.GetAllEmployee();
+                if(result.Count == 0)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+>>>>>>> master
             }
             catch (Exception ex)
             {
@@ -56,9 +65,18 @@ namespace EmployeeApi.Controllers
         {
             try
             {
+<<<<<<< HEAD
                 //var data = repo.GetEmployeeById(id);
                 //return Ok(data);
                 return Ok();
+=======
+                var data = repo.GetEmployeeById(id);
+                if(data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(data);
+>>>>>>> master
             }
             catch
             {
@@ -68,13 +86,22 @@ namespace EmployeeApi.Controllers
 
         [HttpGet]
         [Route("CheckUserCredetial")]
-        public IHttpActionResult CheckUserCredetial(string userName, string password)
+        public IHttpActionResult CheckUserCredential(string userName, string password)
         {
             try
             {
+<<<<<<< HEAD
                 //var data = repo.CheckUserCredetial(userName, password);
                 //return Ok(data);
                 return Ok();
+=======
+                var data = repo.CheckUserCredetial(userName, password);
+                if(data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(data);
+>>>>>>> master
             }
             catch
             {
@@ -97,9 +124,9 @@ namespace EmployeeApi.Controllers
                 //return Created("Created at {uri}", new Employees { Id = emp.Id });
                 return Ok();
             }
-            catch
+            catch(Exception ex)
             {
-                return InternalServerError();
+                return InternalServerError(ex);
             }
         }
 
