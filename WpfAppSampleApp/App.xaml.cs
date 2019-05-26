@@ -1,4 +1,5 @@
-﻿using System;
+
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -15,5 +16,7 @@ namespace WpfAppSampleApp
     /// </summary>
     public partial class App : Application
     {
+        //test from local
+        //
     }
 }
